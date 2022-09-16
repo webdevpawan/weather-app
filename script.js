@@ -1,10 +1,19 @@
 const apiKey = "5b49aeb08cdcb9d5b151ceaefb7372fa";
 
-navigator.geolocation.getCurrentPosition(function showPosition(position) {
-    const latitude = position.coords.latitude;
-    const longitude = position.coords.longitude;
-    showWeather(latitude, longitude)
+navigator.geolocation.getCurrentPosition((position) => {
+    showWeather(position.coords.latitude, position.coords.longitude);
 });
+
+function handlePermissions() {
+    navigator.permissions.query({ name: 'geolocation' })
+    .then((result) => {
+        if (result.state != "granted") {
+            alert("Sorry, location is needed.")
+            $(".outer").css({ "display": "none" });
+        }
+    })
+}
+setTimeout(handlePermissions, 5000)
 
 $("#search").click(function () {
 
@@ -18,7 +27,7 @@ $("#search").click(function () {
                 alert("Not Found")
             }
             else {
-                $(".outer").css({"display": ""});
+                $(".outer").css({ "display": "" });
                 showWeather(data[0].lat, data[0].lon);
             }
         },
@@ -34,6 +43,7 @@ function showWeather(lat, lon) {
         url: `https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&units=metric&appid=${apiKey}`,
         method: "GET",
         success: function (data) {
+            // console.log(data);
             $("#city").html(`${data.name}, ${data.sys.country}`);
 
             let date = new Date();
@@ -60,8 +70,8 @@ function showWeather(lat, lon) {
                 $("body").css({ "background-image": "url('./images/bg.jpeg')" })
             }
 
-            $(".outer").css({"display": "none"});
-        
+            $(".outer").css({ "display": "none" });
+
         },
         error: function (err) {
             console.log(err)
