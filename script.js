@@ -11,7 +11,7 @@ $("#search").click(function () {
     let location = $("#location").val();
 
     $.ajax({
-        url: `http://api.openweathermap.org/geo/1.0/direct?q=${location}&appid=${apiKey}`,
+        url: `https://api.openweathermap.org/geo/1.0/direct?q=${location}&appid=${apiKey}`,
         method: "GET",
         success: function (data) {
             if(data.length == 0){
