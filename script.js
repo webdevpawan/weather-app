@@ -64,7 +64,7 @@ function showWeather(lat, lon) {
                 $("body").css({ "background-image": "url('./images/cloudy.jpg')" })
             }
             else if (data.weather[0].main == "Snow") {
-                $("body").css({ "background-image": "url('./images/cloudy.jpg')" })
+                $("body").css({ "background-image": "url('./images/snow.jpeg')" })
             }
             else {
                 $("body").css({ "background-image": "url('./images/bg.jpeg')" })
