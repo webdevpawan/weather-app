@@ -14,10 +14,11 @@ $("#search").click(function () {
         url: `https://api.openweathermap.org/geo/1.0/direct?q=${location}&appid=${apiKey}`,
         method: "GET",
         success: function (data) {
-            if(data.length == 0){
+            if (data.length == 0) {
                 alert("Not Found")
             }
-            else{
+            else {
+                $(".outer").css({"display": ""});
                 showWeather(data[0].lat, data[0].lon);
             }
         },
@@ -37,40 +38,31 @@ function showWeather(lat, lon) {
             $("#city").html(`${data.name}, ${data.sys.country}`);
 
             let date = new Date();
-            const weekday = ["Sunday","Monday","Tuesday","Wednesday","Thursday","Friday","Saturday"];
-            const month = ["January","February","March","April","May","June","July","August","September","October","November","December"];
+            const weekday = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
+            const month = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
             $("#date").html(`${weekday[date.getDay()]}, ${date.getDate()} ${month[date.getMonth()]} ${date.getFullYear()}`);
             $("#temp").html(`${data.main.temp.toFixed(1)}° C`);
-            
-            let weather_condition = ""
-            let weather_desc = ""
-            for(let i = 0; i < data.weather.length; i++){
-                if (data.weather.length == 1) {
-                    $("#weather").html(data.weather[0].main)
-                    $("#weather-desc").html(data.weather[0].description)
-                } else {
-                    weather_condition += ` ${data.weather[i].main} /`
-                    weather_desc += ` ${data.weather[i].description} /`
-                    $("#weather").html(weather_condition)
-                    $("#weather-desc").html(weather_desc)
-                }    
+            $("#weather").html(data.weather[0].main)
+            $("#weather-desc").html(data.weather[0].description)
 
-                if(data.weather[i].main == "Rain"){
-                    $("body").css({"background-image": "url('./images/rain.jpg')"})
-                }
-                else if(data.weather[i].main == "Clear") {
-                    $("body").css({"background-image": "url('./images/clear.jpg')"})
-                }
-                else if(data.weather[i].main == "Cloudy" || data.weather[i].main == "Clouds" ){
-                    $("body").css({"background-image": "url('./images/cloudy.jpg')"})
-                }
-                else if(data.weather[i].main == "Snow") {
-                    $("body").css({"background-image": "url('./images/cloudy.jpg')"})
-                }
-                else{
-                    $("body").css({"background-image": "url('./images/bg.jpeg')"})
-                }
+            if (data.weather[0].main == "Rain") {
+                $("body").css({ "background-image": "url('./images/rain.jpg')" })
             }
+            else if (data.weather[0].main == "Clear") {
+                $("body").css({ "background-image": "url('./images/clear.jpg')" })
+            }
+            else if (data.weather[0].main == "Cloudy" || data.weather[0].main == "Clouds") {
+                $("body").css({ "background-image": "url('./images/cloudy.jpg')" })
+            }
+            else if (data.weather[0].main == "Snow") {
+                $("body").css({ "background-image": "url('./images/cloudy.jpg')" })
+            }
+            else {
+                $("body").css({ "background-image": "url('./images/bg.jpeg')" })
+            }
+
+            $(".outer").css({"display": "none"});
+        
         },
         error: function (err) {
             console.log(err)
