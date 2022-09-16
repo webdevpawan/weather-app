@@ -14,6 +14,7 @@ body {
   background-size: cover;
   background-position: center;
   overflow-y: hidden;
+  background-repeat: no-repeat;
 }
 body::before {
   position: absolute;
@@ -52,6 +53,7 @@ body::before {
 }
 .search {
   z-index: 11111;
+  display: flex;
 }
 .search input {
   width: 250px;
@@ -84,8 +86,20 @@ body::before {
     padding: 2rem;
   }
   .search input {
-    width: 200px;
+    width: 180px;
     height: 40px;
+  }
+  .date-location h2 {
+    font-size: 3rem;
+  }
+  .temp {
+    font-size: 3.5rem;
+  }
+  .main-section span {
+    font-size: 1rem;
+  }
+  .search button{
+    width: 80px;
   }
 }
 
