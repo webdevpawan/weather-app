@@ -16,8 +16,7 @@ function handlePermissions() {
 setTimeout(handlePermissions, 5000)
 
 $("#search").click(function () {
-
-    let location = $("#location").val();
+    const location = $("#location").val();
 
     $.ajax({
         url: `https://api.openweathermap.org/geo/1.0/direct?q=${location}&appid=${apiKey}`,
@@ -34,8 +33,9 @@ $("#search").click(function () {
         error: function (err) {
             console.log(err)
         }
-
     })
+
+    $("#location").val("");
 })
 
 function showWeather(lat, lon) {
