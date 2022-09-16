@@ -34,7 +34,6 @@ function showWeather(lat, lon) {
         url: `https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&units=metric&appid=${apiKey}`,
         method: "GET",
         success: function (data) {
-            console.log(data);
             $("#city").html(`${data.name}, ${data.sys.country}`);
 
             let date = new Date();
